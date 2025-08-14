@@ -1,4 +1,4 @@
-"use client"; // bắt buộc để chạy được ở browser
+"use client";
 
 import { Provider } from "react-redux";
 import { store } from ".";

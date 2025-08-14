@@ -13,19 +13,27 @@ import {
   deleteStudentAsync,
   setStudentInput,
   clearStudentInput,
+  setStudents, // thêm action này trong slice để set thẳng mảng students
 } from "../redux/studentSlice";
 
-const StudentTable = () => {
+const StudentTable = ({ initialData }) => {
   const dispatch = useDispatch();
   const { students = [], studentInput } = useSelector(
     (state) => state.students
   );
 
-  // Load danh sách + clear form khi mount
+  // Lần đầu mount
   useEffect(() => {
-    dispatch(fetchStudents());
     dispatch(clearStudentInput());
-  }, [dispatch]);
+
+    if (initialData?.length) {
+      // Nếu có dữ liệu từ server -> set luôn vào store
+      dispatch(setStudents(initialData));
+    } else {
+      // Nếu không có dữ liệu -> fetch từ API
+      dispatch(fetchStudents());
+    }
+  }, [dispatch, initialData]);
 
   // Mở modal thêm mới
   const openAddModal = () => {

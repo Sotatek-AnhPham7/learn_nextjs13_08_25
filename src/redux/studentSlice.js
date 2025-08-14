@@ -80,6 +80,10 @@ const studentSlice = createSlice({
         };
       }
     },
+    setStudents: (state, action) => {
+      state.students = action.payload;
+      state.filteredStudents = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -131,6 +135,7 @@ export const {
   setStudentInput,
   clearStudentInput,
   updateStudentInputField,
+  setStudents,
 } = studentSlice.actions;
 
 export const selectStudentInput = (state) => state.students.studentInput;
